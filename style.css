@@ -1,0 +1,16 @@
+.container {
+    margin: 30px 0 0 350px;
+}
+
+.col-sm-2 {
+    padding-top: 23px;
+}
+
+h2 {
+    text-align: left;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+    color: black;
+    padding: auto;
+    margin: 0 auto;
+}
