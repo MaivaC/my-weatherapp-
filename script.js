@@ -18,6 +18,9 @@ h3.innerHTML = `${day} ${date},${hours}:${minutes}`;
 
 function showTemperature(response) {
   console.log(response.data);
+  let city = response.data.name;
+  let cityName=document.querySelector("h2");
+  cityName.innerHTML=`${city}`;
   let temperature = Math.round(response.data.main.temp);
   let temperatureElement = document.querySelector("#temperature");
   temperatureElement.innerHTML = `${temperature}`;
