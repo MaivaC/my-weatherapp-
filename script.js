@@ -42,11 +42,24 @@ function showTemperature(response) {
 
 
 
-
-  let apiKey = "1b903b13fd4caf1f82d1ab59d8fe0b9f";
+function search(city){
+let apiKey = "1b903b13fd4caf1f82d1ab59d8fe0b9f";
   let city="Paris";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showTemperature);
+
+}
+ function handleSubmit(event){
+    event.preventDefault();
+    let cityInputElement=document.querySelector("#city-input");
+    search(cityInputElement.value);
+ }
+  search("Paris");
+
+
+  let form=document.querySelector("#search-form");
+  form.addEventListener("submit", handleSubmit);
+
 
 
 
