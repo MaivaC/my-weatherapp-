@@ -50,7 +50,8 @@ img {
     display: inline-block;
 
     line-height: 26px;
-
-
-
+}
+.weather-temperature.active.hover{
+    
+    text-decoration: none;
 }

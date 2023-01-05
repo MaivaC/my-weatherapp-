@@ -25,12 +25,13 @@ function showTemperature(response) {
      let windElement=document.querySelector("#wind");
      let dateElement=document.querySelector("#date");
       let iconElement=document.querySelector("#icon");
-     
+      celsuisTempertaure=response.data.main.temp;
+
+
+
   let city = response.data.name;
- 
-  cityName.innerHTML=`${city}`;
+ cityName.innerHTML=`${city}`;
   let temperature = Math.round(response.data.main.temp);
-  
   temperatureElement.innerHTML = `${temperature}`;
   descriptionElement.innerHTML= response.data.weather[0].description;
    humidityElement.innerHTML=response.data.main.humidity;
@@ -54,13 +55,38 @@ let apiKey = "1b903b13fd4caf1f82d1ab59d8fe0b9f";
     let cityInputElement=document.querySelector("#city-input");
     search(cityInputElement.value);
  }
-  search("Paris");
+
+ function displayFahenreitTemperature(event){
+  event.preventdefault();
+  let fahenreitTemperature=( celsuisTempertaure*9)/5 +32;
+  //remove the active class from celsuis link
+  celsuisLink.classList.remove("active");
+  fahenreitLink.classList.add("active");
+  let temperatureElement=document.querySelector("#temperature");
+temperatureElement.innerHTML=Math.round(fahenreitTemperature);
+  alert("link clicked");
+}
+
+function displayCelsuisTemperature(event){
+  event.preventDefault();
+  let temperatureElement=document.querySelector("#temperature");
+  //add the active class from celsuis link
+  celsuisLink.classList.add("active");
+  fahenreitLink.classList.remove("active");
+  temperatureElement.innerHTML=Math.round(celsuisTemperature);
+}
+
+ let celsuisTempertaure=null;
 
 
   let form=document.querySelector("#search-form");
   form.addEventListener("submit", handleSubmit);
 
 
+  let fahenreitLink=document.querySelector("#Fahenreit-link");
+fahenreitLink.addEventListener("click",displayFahenreitTemperature);
 
+let celsuisLink=documet.querySelector("#celsuis-link");
+celsuisLink.addEventListener("click",displayCelsuisTemperature);
 
-
+ search("Paris");
