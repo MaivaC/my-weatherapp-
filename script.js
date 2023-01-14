@@ -9,21 +9,30 @@ let minutes = now.getMinutes();
 if (minutes < 10) {
   minutes = `0${minutes}`;
 }
-let days = ["SUN", "MON", "TUES", "WED", "THURS", "FRI", "SAT"];
+let days = ["SUN","MON","TUES","WeD","THURS","FRI","SAT"];
 let day = days[now.getDay()];
 h3.innerHTML = `${day} ${date},${hours}:${minutes}`;
 
-function displayForecast(){
-  let forecastElement=document.querySelector("#forecast");
+function formatDay(timestamp){
+let date=new Date(timestamp*1000);
+let day= date.getDay();
+let days=["Sun","Mon","Tue","Wed","Thur","Fri","Sat"];
+return days[day];
+}
+
+function displayForecast(response){
+let forecast=response.data.daily;
+
+let forecastElement=document.querySelector("#forecast");
+
   let forecastHTML=`<div class="row">`;
-  let days=["SAT","SUN","MON","TUE","WED","THUR"];
- days.forEach(function (day){
+forecast.forEach(function (forecastDay){
   forecastHTML=forecastHTML+` <div class="col-2">
-                                        <div class="weather-forecast-date">${day}</div>
-                                        <img src="http://openweathermap.org/img/wn/04n@2x.png" alt="" />
+                                        <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
+                                        <img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}04n@2x.png" alt="" />
                                         <div class="weather-forecast-temperatures">
-                                            <span class="weather-forecast-temperature-max">16°</span>
-                                            <span class="weather-forecast-temperature-min">9°</span>
+                                            <span class="weather-forecast-temperature-max">${Math.round(forecastDay.temp.max)}°</span>
+                                            <span class="weather-forecast-temperature-min">${Math.round(forecastDay.temp.min)}°</span>
 
                                         </div>
 </div>`;
@@ -110,3 +119,4 @@ celsuisLink.addEventListener("click", displayCelsuisTemperature);
 
 search("Paris");
 displayForecast();
+
